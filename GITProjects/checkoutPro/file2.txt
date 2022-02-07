@@ -1,0 +1,2 @@
+fisrt line in file2.txt
+
