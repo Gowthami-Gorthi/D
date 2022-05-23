@@ -1,4 +1,4 @@
-﻿
+﻿@model GitTestProject.Models.employee
 @{
     ViewBag.Title = "Login";
 }
@@ -8,18 +8,18 @@
     <div>
         <form method="post">
             <table>
-                <td>Username</td>
-                <td><input type="text" name="uname" /></td>
-                <td>Password</td>
-                <td><input type="password" name="pass" /></td>
-
+                <tr><td>Username</td>
+                <td>@Html.TextBoxFor(Model=>Model.Login)</td></tr>
+                <tr><td>Password</td>
+                <td>@Html.TextBoxFor(Model=>Model.Password)</td></tr>
             </table>
             <input type="submit" value="Login" />
         </form>
     </div>
     <div>
-        @if(@ViewBag.Title!=null){
-            <div>Model.uname</div><div>Model.pass</div>
+        @if (@ViewBag.Titl != null)
+        {
+        <div style="color:red">@ViewBag.Titl</div>
         }
     </div>
 </body>

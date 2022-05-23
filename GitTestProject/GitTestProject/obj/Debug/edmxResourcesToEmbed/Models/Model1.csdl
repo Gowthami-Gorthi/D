@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="empManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="attendance">
+    <Key>
+      <PropertyRef Name="attendance_id" />
+    </Key>
+    <Property Name="attendance_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="emp_id" Type="Int32" />
+    <Property Name="Day_start" Type="DateTime" Precision="3" />
+    <Property Name="Day_end" Type="DateTime" Precision="3" />
+    <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="timesheets" Relationship="Self.fk1_timesheet" FromRole="attendance" ToRole="timesheet" />
+    <NavigationProperty Name="employee" Relationship="Self.fk2_emp" FromRole="attendance" ToRole="employee" />
+  </EntityType>
+  <EntityType Name="Bank">
+    <Key>
+      <PropertyRef Name="Account_no" />
+    </Key>
+    <Property Name="Account_no" Type="Int64" Nullable="false" />
+    <Property Name="Account_HName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ifsc_code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="branch_code" Type="Int64" />
+    <Property Name="balance" Type="Int32" />
+    <Property Name="pan_card" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="salary_slip" Relationship="Self.fk_bank" FromRole="Bank" ToRole="salary_slip" />
+  </EntityType>
+  <EntityType Name="employee">
+    <Key>
+      <PropertyRef Name="emp_id" />
+    </Key>
+    <Property Name="emp_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Role" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DOB" Type="DateTime" Precision="0" />
+    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="category" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="security_question" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="solution" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="User_Profile" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="attendances" Relationship="Self.fk2_emp" FromRole="employee" ToRole="attendance" />
+    <NavigationProperty Name="Leaves" Relationship="Self.fk_emp" FromRole="employee" ToRole="Leave" />
+    <NavigationProperty Name="timesheets" Relationship="Self.fk1_emp" FromRole="employee" ToRole="timesheet" />
+    <NavigationProperty Name="salaries" Relationship="Self.fk3_emp" FromRole="employee" ToRole="salary" />
+  </EntityType>
+  <EntityType Name="Leave">
+    <Key>
+      <PropertyRef Name="LeaveId" />
+    </Key>
+    <Property Name="LeaveId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="emp_id" Type="Int32" />
+    <Property Name="From_date" Type="DateTime" Precision="0" />
+    <Property Name="End_date" Type="DateTime" Precision="0" />
+    <Property Name="Leave_type" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="employee" Relationship="Self.fk_emp" FromRole="Leave" ToRole="employee" />
+  </EntityType>
+  <EntityType Name="salary">
+    <Key>
+      <PropertyRef Name="salary_id" />
+    </Key>
+    <Property Name="salary_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="emp_id" Type="Int32" />
+    <Property Name="Basic_pay" Type="Int32" />
+    <Property Name="House_rent" Type="Int32" />
+    <Property Name="Bonus" Type="Int32" />
+    <Property Name="Provident_fund" Type="Int32" />
+    <Property Name="Esi" Type="Int32" />
+    <Property Name="Prof_Tax" Type="Int32" />
+    <NavigationProperty Name="employee" Relationship="Self.fk3_emp" FromRole="salary" ToRole="employee" />
+    <NavigationProperty Name="salary_slip" Relationship="Self.fk_salary" FromRole="salary" ToRole="salary_slip" />
+  </EntityType>
+  <EntityType Name="salary_slip">
+    <Key>
+      <PropertyRef Name="sal_slip_id" />
+    </Key>
+    <Property Name="sal_slip_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Account_no" Type="Int64" />
+    <Property Name="salary_id" Type="Int32" />
+    <Property Name="sal_date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Bank" Relationship="Self.fk_bank" FromRole="salary_slip" ToRole="Bank" />
+    <NavigationProperty Name="salary" Relationship="Self.fk_salary" FromRole="salary_slip" ToRole="salary" />
+  </EntityType>
+  <EntityType Name="timesheet">
+    <Key>
+      <PropertyRef Name="sheet_id" />
+    </Key>
+    <Property Name="sheet_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="emp_id" Type="Int32" />
+    <Property Name="attendance_id" Type="Int32" />
+    <NavigationProperty Name="attendance" Relationship="Self.fk1_timesheet" FromRole="timesheet" ToRole="attendance" />
+    <NavigationProperty Name="employee" Relationship="Self.fk1_emp" FromRole="timesheet" ToRole="employee" />
+  </EntityType>
+  <Association Name="fk1_timesheet">
+    <End Role="attendance" Type="Self.attendance" Multiplicity="0..1" />
+    <End Role="timesheet" Type="Self.timesheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="attendance">
+        <PropertyRef Name="attendance_id" />
+      </Principal>
+      <Dependent Role="timesheet">
+        <PropertyRef Name="attendance_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk2_emp">
+    <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+    <End Role="attendance" Type="Self.attendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="emp_id" />
+      </Principal>
+      <Dependent Role="attendance">
+        <PropertyRef Name="emp_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_bank">
+    <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
+    <End Role="salary_slip" Type="Self.salary_slip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="Account_no" />
+      </Principal>
+      <Dependent Role="salary_slip">
+        <PropertyRef Name="Account_no" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_emp">
+    <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+    <End Role="Leave" Type="Self.Leave" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="emp_id" />
+      </Principal>
+      <Dependent Role="Leave">
+        <PropertyRef Name="emp_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk1_emp">
+    <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+    <End Role="timesheet" Type="Self.timesheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="emp_id" />
+      </Principal>
+      <Dependent Role="timesheet">
+        <PropertyRef Name="emp_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk3_emp">
+    <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+    <End Role="salary" Type="Self.salary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="emp_id" />
+      </Principal>
+      <Dependent Role="salary">
+        <PropertyRef Name="emp_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_salary">
+    <End Role="salary" Type="Self.salary" Multiplicity="0..1" />
+    <End Role="salary_slip" Type="Self.salary_slip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="salary">
+        <PropertyRef Name="salary_id" />
+      </Principal>
+      <Dependent Role="salary_slip">
+        <PropertyRef Name="salary_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="empManagementEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="attendances" EntityType="Self.attendance" />
+    <EntitySet Name="Banks" EntityType="Self.Bank" />
+    <EntitySet Name="employees" EntityType="Self.employee" />
+    <EntitySet Name="Leaves" EntityType="Self.Leave" />
+    <EntitySet Name="salaries" EntityType="Self.salary" />
+    <EntitySet Name="salary_slips" EntityType="Self.salary_slip" />
+    <EntitySet Name="timesheets" EntityType="Self.timesheet" />
+    <AssociationSet Name="fk1_timesheet" Association="Self.fk1_timesheet">
+      <End Role="attendance" EntitySet="attendances" />
+      <End Role="timesheet" EntitySet="timesheets" />
+    </AssociationSet>
+    <AssociationSet Name="fk2_emp" Association="Self.fk2_emp">
+      <End Role="employee" EntitySet="employees" />
+      <End Role="attendance" EntitySet="attendances" />
+    </AssociationSet>
+    <AssociationSet Name="fk_bank" Association="Self.fk_bank">
+      <End Role="Bank" EntitySet="Banks" />
+      <End Role="salary_slip" EntitySet="salary_slips" />
+    </AssociationSet>
+    <AssociationSet Name="fk_emp" Association="Self.fk_emp">
+      <End Role="employee" EntitySet="employees" />
+      <End Role="Leave" EntitySet="Leaves" />
+    </AssociationSet>
+    <AssociationSet Name="fk1_emp" Association="Self.fk1_emp">
+      <End Role="employee" EntitySet="employees" />
+      <End Role="timesheet" EntitySet="timesheets" />
+    </AssociationSet>
+    <AssociationSet Name="fk3_emp" Association="Self.fk3_emp">
+      <End Role="employee" EntitySet="employees" />
+      <End Role="salary" EntitySet="salaries" />
+    </AssociationSet>
+    <AssociationSet Name="fk_salary" Association="Self.fk_salary">
+      <End Role="salary" EntitySet="salaries" />
+      <End Role="salary_slip" EntitySet="salary_slips" />
+    </AssociationSet>
+    <FunctionImport Name="slip" ReturnType="Collection(empManagementModel.slip_Result)">
+      <Parameter Name="emp_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="slip_Result">
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="101" />
+    <Property Type="String" Name="category" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="salary_id" Nullable="false" />
+    <Property Type="Int32" Name="emp_id" Nullable="true" />
+    <Property Type="Int32" Name="Basic_pay" Nullable="true" />
+    <Property Type="Int32" Name="House_rent" Nullable="true" />
+    <Property Type="Int32" Name="Bonus" Nullable="true" />
+    <Property Type="Int32" Name="Provident_fund" Nullable="true" />
+    <Property Type="Int32" Name="Esi" Nullable="true" />
+    <Property Type="Int32" Name="Prof_Tax" Nullable="true" />
+    <Property Type="Int64" Name="Account_no" Nullable="true" />
+    <Property Type="DateTime" Name="sal_date" Nullable="true" />
+  </ComplexType>
+</Schema>

@@ -83,3 +83,7 @@ D:\GitTestProject\GitTestProject\obj\Debug\GitTestProject.csproj.CoreCompileInpu
 D:\GitTestProject\GitTestProject\obj\Debug\GitTestProject.csproj.CopyComplete
 D:\GitTestProject\GitTestProject\obj\Debug\GitTestProject.dll
 D:\GitTestProject\GitTestProject\obj\Debug\GitTestProject.pdb
+D:\GitTestProject\GitTestProject\bin\EntityFramework.dll
+D:\GitTestProject\GitTestProject\bin\EntityFramework.SqlServer.dll
+D:\GitTestProject\GitTestProject\bin\EntityFramework.xml
+D:\GitTestProject\GitTestProject\bin\EntityFramework.SqlServer.xml

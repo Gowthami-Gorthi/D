@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="empManagementModelStoreContainer" CdmEntityContainer="empManagementEntities">
+    <EntitySetMapping Name="attendances">
+      <EntityTypeMapping TypeName="empManagementModel.attendance">
+        <MappingFragment StoreEntitySet="attendance">
+          <ScalarProperty Name="attendance_id" ColumnName="attendance id" />
+          <ScalarProperty Name="emp_id" ColumnName="emp id" />
+          <ScalarProperty Name="Day_start" ColumnName="Day start" />
+          <ScalarProperty Name="Day_end" ColumnName="Day end" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Banks">
+      <EntityTypeMapping TypeName="empManagementModel.Bank">
+        <MappingFragment StoreEntitySet="Bank">
+          <ScalarProperty Name="Account_no" ColumnName="Account no" />
+          <ScalarProperty Name="Account_HName" ColumnName="Account HName" />
+          <ScalarProperty Name="ifsc_code" ColumnName="ifsc code" />
+          <ScalarProperty Name="branch_code" ColumnName="branch code" />
+          <ScalarProperty Name="balance" ColumnName="balance" />
+          <ScalarProperty Name="pan_card" ColumnName="pan card" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="employees">
+      <EntityTypeMapping TypeName="empManagementModel.employee">
+        <MappingFragment StoreEntitySet="employee">
+          <ScalarProperty Name="emp_id" ColumnName="emp id" />
+          <ScalarProperty Name="First_Name" ColumnName="First Name" />
+          <ScalarProperty Name="Last_Name" ColumnName="Last Name" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="security_question" ColumnName="security question" />
+          <ScalarProperty Name="solution" ColumnName="solution" />
+          <ScalarProperty Name="User_Profile" ColumnName="User Profile" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Leaves">
+      <EntityTypeMapping TypeName="empManagementModel.Leave">
+        <MappingFragment StoreEntitySet="Leave">
+          <ScalarProperty Name="LeaveId" ColumnName="LeaveId" />
+          <ScalarProperty Name="emp_id" ColumnName="emp id" />
+          <ScalarProperty Name="From_date" ColumnName="From date" />
+          <ScalarProperty Name="End_date" ColumnName="End date" />
+          <ScalarProperty Name="Leave_type" ColumnName="Leave type" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="salaries">
+      <EntityTypeMapping TypeName="empManagementModel.salary">
+        <MappingFragment StoreEntitySet="salary">
+          <ScalarProperty Name="salary_id" ColumnName="salary id" />
+          <ScalarProperty Name="emp_id" ColumnName="emp id" />
+          <ScalarProperty Name="Basic_pay" ColumnName="Basic pay" />
+          <ScalarProperty Name="House_rent" ColumnName="House rent" />
+          <ScalarProperty Name="Bonus" ColumnName="Bonus" />
+          <ScalarProperty Name="Provident_fund" ColumnName="Provident fund" />
+          <ScalarProperty Name="Esi" ColumnName="Esi" />
+          <ScalarProperty Name="Prof_Tax" ColumnName="Prof Tax" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="salary_slips">
+      <EntityTypeMapping TypeName="empManagementModel.salary_slip">
+        <MappingFragment StoreEntitySet="salary slip">
+          <ScalarProperty Name="sal_slip_id" ColumnName="sal slip id" />
+          <ScalarProperty Name="Account_no" ColumnName="Account no" />
+          <ScalarProperty Name="salary_id" ColumnName="salary id" />
+          <ScalarProperty Name="sal_date" ColumnName="sal date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="timesheets">
+      <EntityTypeMapping TypeName="empManagementModel.timesheet">
+        <MappingFragment StoreEntitySet="timesheet">
+          <ScalarProperty Name="sheet_id" ColumnName="sheet id" />
+          <ScalarProperty Name="emp_id" ColumnName="emp id" />
+          <ScalarProperty Name="attendance_id" ColumnName="attendance id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="slip" FunctionName="empManagementModel.Store.slip">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="empManagementModel.slip_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="salary_id" ColumnName="salary id" />
+          <ScalarProperty Name="emp_id" ColumnName="emp id" />
+          <ScalarProperty Name="Basic_pay" ColumnName="Basic pay" />
+          <ScalarProperty Name="House_rent" ColumnName="House rent" />
+          <ScalarProperty Name="Bonus" ColumnName="Bonus" />
+          <ScalarProperty Name="Provident_fund" ColumnName="Provident fund" />
+          <ScalarProperty Name="Esi" ColumnName="Esi" />
+          <ScalarProperty Name="Prof_Tax" ColumnName="Prof Tax" />
+          <ScalarProperty Name="Account_no" ColumnName="Account no" />
+          <ScalarProperty Name="sal_date" ColumnName="sal date" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

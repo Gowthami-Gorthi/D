@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="empManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="attendance">
+    <Key>
+      <PropertyRef Name="attendance id" />
+    </Key>
+    <Property Name="attendance id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="emp id" Type="int" />
+    <Property Name="Day start" Type="datetime" />
+    <Property Name="Day end" Type="datetime" />
+    <Property Name="status" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Bank">
+    <Key>
+      <PropertyRef Name="Account no" />
+    </Key>
+    <Property Name="Account no" Type="bigint" Nullable="false" />
+    <Property Name="Account HName" Type="varchar" MaxLength="50" />
+    <Property Name="ifsc code" Type="varchar" MaxLength="15" />
+    <Property Name="branch code" Type="bigint" />
+    <Property Name="balance" Type="int" />
+    <Property Name="pan card" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="employee">
+    <Key>
+      <PropertyRef Name="emp id" />
+    </Key>
+    <Property Name="emp id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="First Name" Type="varchar" MaxLength="50" />
+    <Property Name="Last Name" Type="varchar" MaxLength="50" />
+    <Property Name="Role" Type="varchar" MaxLength="10" />
+    <Property Name="Login" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar(max)" />
+    <Property Name="DOB" Type="date" />
+    <Property Name="Gender" Type="varchar" MaxLength="10" />
+    <Property Name="category" Type="varchar" MaxLength="20" />
+    <Property Name="security question" Type="varchar" MaxLength="50" />
+    <Property Name="solution" Type="varchar(max)" />
+    <Property Name="User Profile" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Leave">
+    <Key>
+      <PropertyRef Name="LeaveId" />
+    </Key>
+    <Property Name="LeaveId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="emp id" Type="int" />
+    <Property Name="From date" Type="date" />
+    <Property Name="End date" Type="date" />
+    <Property Name="Leave type" Type="varchar" MaxLength="15" />
+    <Property Name="Reason" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="salary">
+    <Key>
+      <PropertyRef Name="salary id" />
+    </Key>
+    <Property Name="salary id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="emp id" Type="int" />
+    <Property Name="Basic pay" Type="int" />
+    <Property Name="House rent" Type="int" />
+    <Property Name="Bonus" Type="int" />
+    <Property Name="Provident fund" Type="int" />
+    <Property Name="Esi" Type="int" />
+    <Property Name="Prof Tax" Type="int" />
+  </EntityType>
+  <EntityType Name="salary slip">
+    <Key>
+      <PropertyRef Name="sal slip id" />
+    </Key>
+    <Property Name="sal slip id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Account no" Type="bigint" />
+    <Property Name="salary id" Type="int" />
+    <Property Name="sal date" Type="date" />
+  </EntityType>
+  <EntityType Name="timesheet">
+    <Key>
+      <PropertyRef Name="sheet id" />
+    </Key>
+    <Property Name="sheet id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="emp id" Type="int" />
+    <Property Name="attendance id" Type="int" />
+  </EntityType>
+  <Association Name="fk_bank">
+    <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
+    <End Role="salary slip" Type="Self.salary slip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="Account no" />
+      </Principal>
+      <Dependent Role="salary slip">
+        <PropertyRef Name="Account no" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_emp">
+    <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+    <End Role="Leave" Type="Self.Leave" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="emp id" />
+      </Principal>
+      <Dependent Role="Leave">
+        <PropertyRef Name="emp id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_salary">
+    <End Role="salary" Type="Self.salary" Multiplicity="0..1" />
+    <End Role="salary slip" Type="Self.salary slip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="salary">
+        <PropertyRef Name="salary id" />
+      </Principal>
+      <Dependent Role="salary slip">
+        <PropertyRef Name="salary id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk1_emp">
+    <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+    <End Role="timesheet" Type="Self.timesheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="emp id" />
+      </Principal>
+      <Dependent Role="timesheet">
+        <PropertyRef Name="emp id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk1_timesheet">
+    <End Role="attendance" Type="Self.attendance" Multiplicity="0..1" />
+    <End Role="timesheet" Type="Self.timesheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="attendance">
+        <PropertyRef Name="attendance id" />
+      </Principal>
+      <Dependent Role="timesheet">
+        <PropertyRef Name="attendance id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk2_emp">
+    <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+    <End Role="attendance" Type="Self.attendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="emp id" />
+      </Principal>
+      <Dependent Role="attendance">
+        <PropertyRef Name="emp id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk3_emp">
+    <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+    <End Role="salary" Type="Self.salary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="emp id" />
+      </Principal>
+      <Dependent Role="salary">
+        <PropertyRef Name="emp id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="slip" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="emp_id" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="empManagementModelStoreContainer">
+    <EntitySet Name="attendance" EntityType="Self.attendance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bank" EntityType="Self.Bank" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Leave" EntityType="Self.Leave" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="salary" EntityType="Self.salary" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="salary slip" EntityType="Self.salary slip" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="timesheet" EntityType="Self.timesheet" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_bank" Association="Self.fk_bank">
+      <End Role="Bank" EntitySet="Bank" />
+      <End Role="salary slip" EntitySet="salary slip" />
+    </AssociationSet>
+    <AssociationSet Name="fk_emp" Association="Self.fk_emp">
+      <End Role="employee" EntitySet="employee" />
+      <End Role="Leave" EntitySet="Leave" />
+    </AssociationSet>
+    <AssociationSet Name="fk_salary" Association="Self.fk_salary">
+      <End Role="salary" EntitySet="salary" />
+      <End Role="salary slip" EntitySet="salary slip" />
+    </AssociationSet>
+    <AssociationSet Name="fk1_emp" Association="Self.fk1_emp">
+      <End Role="employee" EntitySet="employee" />
+      <End Role="timesheet" EntitySet="timesheet" />
+    </AssociationSet>
+    <AssociationSet Name="fk1_timesheet" Association="Self.fk1_timesheet">
+      <End Role="attendance" EntitySet="attendance" />
+      <End Role="timesheet" EntitySet="timesheet" />
+    </AssociationSet>
+    <AssociationSet Name="fk2_emp" Association="Self.fk2_emp">
+      <End Role="employee" EntitySet="employee" />
+      <End Role="attendance" EntitySet="attendance" />
+    </AssociationSet>
+    <AssociationSet Name="fk3_emp" Association="Self.fk3_emp">
+      <End Role="employee" EntitySet="employee" />
+      <End Role="salary" EntitySet="salary" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

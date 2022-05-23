@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="28c85df43ff54cb5bafdc314a0ae0a1a" Name="Diagram1">
+        <EntityTypeShape EntityType="empManagementModel.attendance" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="empManagementModel.Bank" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="empManagementModel.employee" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="empManagementModel.Leave" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="empManagementModel.salary" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="empManagementModel.salary_slip" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="empManagementModel.timesheet" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <AssociationConnector Association="empManagementModel.fk1_timesheet" ManuallyRouted="false" />
+        <AssociationConnector Association="empManagementModel.fk2_emp" ManuallyRouted="false" />
+        <AssociationConnector Association="empManagementModel.fk_bank" ManuallyRouted="false" />
+        <AssociationConnector Association="empManagementModel.fk_emp" ManuallyRouted="false" />
+        <AssociationConnector Association="empManagementModel.fk1_emp" ManuallyRouted="false" />
+        <AssociationConnector Association="empManagementModel.fk3_emp" ManuallyRouted="false" />
+        <AssociationConnector Association="empManagementModel.fk_salary" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
