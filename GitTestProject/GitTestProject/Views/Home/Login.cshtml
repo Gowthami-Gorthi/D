@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+<body>
+    <div>
+        <form method="post">
+            <table>
+                <td>Username</td>
+                <td><input type="text" name="uname" /></td>
+                <td>Password</td>
+                <td><input type="password" name="pass" /></td>
+
+            </table>
+            <input type="submit" value="Login" />
+        </form>
+    </div>
+    <div>
+        @if(@ViewBag.Title!=null){
+            <div>Model.uname</div><div>Model.pass</div>
+        }
+    </div>
+</body>

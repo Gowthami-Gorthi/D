@@ -14,5 +14,17 @@ namespace GitTestProject.Controllers
 
             return View();
         }
+        public ActionResult Login()
+        {
+            ViewBag.Title = "Login Page";
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(string uname, string pass)
+        {
+            ViewBag.Title = "valid";
+            return View(uname, pass);
+        }
     }
 }
