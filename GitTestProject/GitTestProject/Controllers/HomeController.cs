@@ -44,6 +44,7 @@ namespace GitTestProject.Controllers
         {
             if(ModelState.IsValid)
             {
+                //Encryption
                 con.employees.Add(employee);
                 if (con.SaveChanges() > 0)
                 {
