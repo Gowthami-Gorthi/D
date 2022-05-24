@@ -78,7 +78,6 @@ D:\GitTestProject\GitTestProject\bin\System.Web.WebPages.Deployment.xml
 D:\GitTestProject\GitTestProject\bin\System.Web.WebPages.Razor.xml
 D:\GitTestProject\GitTestProject\bin\Antlr3.Runtime.pdb
 D:\GitTestProject\GitTestProject\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\GitTestProject\GitTestProject\obj\Debug\GitTestProject.csproj.AssemblyReference.cache
 D:\GitTestProject\GitTestProject\obj\Debug\GitTestProject.csproj.CoreCompileInputs.cache
 D:\GitTestProject\GitTestProject\obj\Debug\GitTestProject.csproj.CopyComplete
 D:\GitTestProject\GitTestProject\obj\Debug\GitTestProject.dll
